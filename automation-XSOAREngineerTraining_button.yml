@@ -1,0 +1,60 @@
+args:
+- auto: PREDEFINED
+  isArray: true
+  name: function
+  predefined:
+  - ResetTraining
+  - RetryScenario
+  - SkipScenario
+commonfields:
+  id: 1973a665-fce2-4cb4-8441-c0fc4d8539fa
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.10.49934
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: XSOAREngineerTraining_button
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  # Author: Michael Hinderman
+  # Date: March 17th, 2023
+  # Purpose: Hackathon. Execute functions related to layout buttons
+
+
+  function = demisto.args().get("function","")
+  scenario = demisto.incidents()[0]["CustomFields"].get("activetrainingscenario","")
+
+  if function == "ResetTraining":
+      return_results(demisto.executeCommand("setIncident", {"activetrainingscenario":"1"}))
+      return_results(demisto.executeCommand("setPlaybook", {"name":"XSOAR Engineer Training - Training 1 - Scenario Manager"}))
+
+  elif function == "RetryScenario":
+      if scenario != "":
+          return_results(demisto.executeCommand("setPlaybook", {"name":"XSOAR Engineer Training - Training 1 - Scenario "+scenario+" - Parent Playbook"}))
+      else:
+          return_results(demisto.executeCommand("setPlaybook", {"name":"XSOAR Engineer Training - Training 1 - Scenario Manager"}))
+
+  elif function == "SkipScenario":
+      scenario = int(scenario)+1
+
+      if scenario > 4:
+          scenario == 1
+
+      return_results(demisto.executeCommand("setIncident", {"activetrainingscenario":str(scenario)}))
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
