@@ -1,0 +1,365 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 689bd861-7ecd-4dd8-836e-bc2aaf9a6e44
+inputs: []
+name: XSOAR Engineer Training - Training 1 - Scenario Manager
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d93f3104-1d0b-49b7-894e-054e6dec94b5
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: d93f3104-1d0b-49b7-894e-054e6dec94b5
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 801be6d2-0d28-437f-867b-e73d218bd386
+      iscommand: false
+      name: Engineer Training Scenario Setup
+      type: title
+      version: -1
+    taskid: 801be6d2-0d28-437f-867b-e73d218bd386
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 195
+        }
+      }
+  "2":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.ActiveTrainingScenario
+          operator: isNotExists
+        - left:
+            iscontext: true
+            value:
+              simple: incident.ActiveTrainingScenario
+          operator: isEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: cee1fe8b-71da-4108-874d-9f9d7782537b
+      iscommand: false
+      name: Check if scenario level exists for level selection
+      type: condition
+      version: -1
+    taskid: cee1fe8b-71da-4108-874d-9f9d7782537b
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 515
+        }
+      }
+  "3":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.activetrainingscenario
+          operator: isEqualString
+          right:
+            value:
+              simple: "1"
+      label: Scenario 1
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.activetrainingscenario
+          operator: isEqualString
+          right:
+            value:
+              simple: "2"
+      label: Scenario 2
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.activetrainingscenario
+          operator: isEqualString
+          right:
+            value:
+              simple: "3"
+      label: Scenario 3
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      Scenario 1:
+      - "5"
+      Scenario 2:
+      - "7"
+      Scenario 3:
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a1fcbf65-4014-4b46-8dbf-837358b506c0
+      iscommand: false
+      name: Select training scenario level
+      type: condition
+      version: -1
+    taskid: a1fcbf65-4014-4b46-8dbf-837358b506c0
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 865
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      activetrainingscenario:
+        simple: "1"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 750453c7-7310-48ef-874c-3e656338868d
+      iscommand: true
+      name: Initialize ScenarioLevel
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 750453c7-7310-48ef-874c-3e656338868d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 592.5,
+          "y": 690
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      name:
+        simple: XSOAR Engineer Training - Training 1 - Scenario 1 - Parent Playbook
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.playbook
+      id: 95d23993-321d-4c62-8d39-4e7f9d5e5fb1
+      iscommand: true
+      name: Set Scenario 1 Playbook
+      script: Builtin|||setPlaybook
+      type: regular
+      version: -1
+    taskid: 95d23993-321d-4c62-8d39-4e7f9d5e5fb1
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1040
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      all:
+        simple: "yes"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Delete field from context.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs.paloaltonetworks.com/cortex/cortex-xsoar/6-2/cortex-xsoar-admin/playbooks/automations.html
+      id: 77218094-a6b1-4232-8820-73ae1b732b28
+      iscommand: false
+      name: Delete Context
+      script: DeleteContext
+      type: regular
+      version: -1
+    taskid: 77218094-a6b1-4232-8820-73ae1b732b28
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 340
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      name:
+        simple: XSOAR Engineer Training - Training 1 - Scenario 2 - Parent Playbook
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.playbook
+      id: 6a515afc-efad-442c-8ecf-31097a15ea5b
+      iscommand: true
+      name: Set Scenario 2 Playbook
+      script: Builtin|||setPlaybook
+      type: regular
+      version: -1
+    taskid: 6a515afc-efad-442c-8ecf-31097a15ea5b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1040
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2c8237d9-75a0-4437-85a3-8fbde28357f3
+      iscommand: false
+      name: Scenario 3 TBD
+      type: regular
+      version: -1
+    taskid: 2c8237d9-75a0-4437-85a3-8fbde28357f3
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1040
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1085,
+        "width": 1240,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
