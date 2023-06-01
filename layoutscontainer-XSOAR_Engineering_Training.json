@@ -1,0 +1,207 @@
+{
+	"cacheVersn": 0,
+	"close": null,
+	"definitionId": "",
+	"description": "",
+	"detached": false,
+	"details": null,
+	"detailsV2": {
+		"TypeName": "",
+		"tabs": [
+			{
+				"id": "summary",
+				"name": "Legacy Summary",
+				"type": "summary"
+			},
+			{
+				"hidden": false,
+				"id": "wjrrwelucr",
+				"name": "Training",
+				"sections": [
+					{
+						"displayType": "CARD",
+						"h": 1,
+						"hideItemTitleOnlyOne": true,
+						"hideName": true,
+						"i": "wjrrwelucr-7c5a09a0-c4df-11ed-902b-df43fee364fa",
+						"items": [
+							{
+								"dropEffect": "move",
+								"endCol": 6,
+								"fieldId": "xsoarengineertrainingscenariotitle",
+								"height": 106,
+								"id": "275e4000-c4e0-11ed-902b-df43fee364fa",
+								"index": 0,
+								"listId": "wjrrwelucr-7c5a09a0-c4df-11ed-902b-df43fee364fa",
+								"sectionItemType": "field",
+								"startCol": 2
+							}
+						],
+						"maxW": 3,
+						"minH": 1,
+						"moved": false,
+						"name": "New Section",
+						"static": false,
+						"w": 3,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"displayType": "ROW",
+						"h": 1,
+						"hideItemTitleOnlyOne": false,
+						"hideName": true,
+						"i": "wjrrwelucr-2b192520-c4e0-11ed-902b-df43fee364fa",
+						"items": [
+							{
+								"args": {
+									"function": {
+										"simple": "ResetTraining"
+									}
+								},
+								"buttonClass": "primary",
+								"endCol": 2,
+								"fieldId": "",
+								"height": 44,
+								"id": "30343680-c4e0-11ed-902b-df43fee364fa",
+								"index": 0,
+								"name": "Start/Reset Training",
+								"scriptId": "1973a665-fce2-4cb4-8441-c0fc4d8539fa",
+								"sectionItemType": "button",
+								"startCol": 0
+							},
+							{
+								"args": {
+									"function": {
+										"simple": "RetryScenario"
+									}
+								},
+								"buttonClass": "success",
+								"endCol": 4,
+								"fieldId": "",
+								"height": 44,
+								"id": "b906cdf0-c4e1-11ed-902b-df43fee364fa",
+								"index": 0,
+								"name": "Retry Scenario",
+								"scriptId": "1973a665-fce2-4cb4-8441-c0fc4d8539fa",
+								"sectionItemType": "button",
+								"startCol": 2
+							},
+							{
+								"args": {
+									"function": {
+										"simple": "SkipScenario"
+									}
+								},
+								"buttonClass": "error",
+								"endCol": 6,
+								"fieldId": "",
+								"height": 44,
+								"id": "ccde7490-c4e1-11ed-902b-df43fee364fa",
+								"index": 0,
+								"name": "Skip Scenario",
+								"scriptId": "1973a665-fce2-4cb4-8441-c0fc4d8539fa",
+								"sectionItemType": "button",
+								"startCol": 4
+							}
+						],
+						"maxW": 3,
+						"minH": 1,
+						"moved": false,
+						"name": "New Section",
+						"static": false,
+						"w": 3,
+						"x": 0,
+						"y": 1
+					},
+					{
+						"h": 3,
+						"i": "wjrrwelucr-ba021680-c4e4-11ed-8697-d3374b1b540b",
+						"items": [],
+						"maxW": 3,
+						"minH": 1,
+						"moved": false,
+						"name": "Scenario Questions/Results",
+						"static": false,
+						"type": "workplan",
+						"w": 1,
+						"x": 0,
+						"y": 2
+					},
+					{
+						"displayType": "ROW",
+						"h": 3,
+						"hideItemTitleOnlyOne": true,
+						"hideName": false,
+						"i": "wjrrwelucr-078e4580-c4e6-11ed-8697-d3374b1b540b",
+						"items": [
+							{
+								"endCol": 4,
+								"fieldId": "xsoarengineertrainingscenariodescription",
+								"height": 106,
+								"id": "4b24dd30-c4e7-11ed-902b-df43fee364fa",
+								"index": 0,
+								"sectionItemType": "field",
+								"startCol": 0
+							}
+						],
+						"maxW": 3,
+						"minH": 1,
+						"moved": false,
+						"name": "Training Description",
+						"static": false,
+						"w": 2,
+						"x": 1,
+						"y": 2
+					}
+				],
+				"type": "custom"
+			},
+			{
+				"id": "warRoom",
+				"name": "War Room",
+				"type": "warRoom"
+			},
+			{
+				"id": "workPlan",
+				"name": "Work Plan",
+				"type": "workPlan"
+			},
+			{
+				"id": "evidenceBoard",
+				"name": "Evidence Board",
+				"type": "evidenceBoard"
+			},
+			{
+				"id": "relatedIncidents",
+				"name": "Related Incidents",
+				"type": "relatedIncidents"
+			},
+			{
+				"id": "canvas",
+				"name": "Canvas",
+				"type": "canvas"
+			}
+		]
+	},
+	"edit": null,
+	"fromServerVersion": "",
+	"group": "incident",
+	"id": "22326bbe-14fc-4bf2-8d7f-df1bafc6b713",
+	"indicatorsDetails": null,
+	"indicatorsQuickView": null,
+	"itemVersion": "",
+	"locked": false,
+	"mobile": null,
+	"name": "XSOAR Engineering Training",
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"quickView": null,
+	"quickViewV2": null,
+	"system": false,
+	"toServerVersion": "",
+	"version": -1
+}
