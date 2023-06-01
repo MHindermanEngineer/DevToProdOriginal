@@ -1,0 +1,82 @@
+commonfields:
+  id: ed446464-16a3-4c87-840e-a0c061d91c0e
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.10.49934
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: XSOAREngineerTraining_Training1_SolutionHandler
+outputs:
+- contextPath: SolutionHandler
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |-
+  # Author: Michael Hinderman
+  # Date: March 17th, 2023
+  # Purpose: Hackathon. Check to see if the training scenarios are correct or not.
+  # Each scenario will be its own function simply for checking context data for content.
+  import datetime
+
+
+  testing = True
+  lg = ""
+
+  def log(data,level='debug'):
+      global lg
+      lg += str(datetime.datetime.now()) + " ("+level+"): " + str(data) +'\n'
+
+  def main():
+      scenarioCheck = demisto.incidents()[0]["CustomFields"].get("activetrainingscenario","")
+
+      if scenarioCheck == '1':
+          check_scenario_one()
+      elif scenarioCheck == '2':
+          check_scenario_one()
+      elif scenarioCheck == '3':
+          check_scenario_one()
+      elif scenarioCheck == '4':
+          check_scenario_one()
+      else:
+          raise_error("Scneario not selected. Scenario broken or being tested")
+
+      if testing:
+          return_results(lg)
+
+  def check_scenario_one():
+      log("Checking scenario 1")
+
+      expectedOutput=demisto.context().get("LoopData","")
+      try:
+          if expectedOutput and len(expectedOutput) == 2 and \
+              expectedOutput[0]["DecodedBase64"] != expectedOutput[1]["DecodedBase64"]  and \
+              "https://www.youtube.com/watch?v=rog8ou-ZepE" in {expectedOutput[0]["DecodedBase64"], expectedOutput[1]["DecodedBase64"]}:
+                  log("Success!")
+                  data = CommandResults(
+                      outputs_prefix="SolutionHandler",
+                      outputs_key_field="scenarioOneResult",
+                      outputs={
+                          'scenarioOneResult':"pass"
+                      }
+                  )
+                  return_results(data)
+      except:
+          log("Failure!")
+
+  if __name__ in ('__builtin__', 'builtins', '__main__'):
+      main()
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
