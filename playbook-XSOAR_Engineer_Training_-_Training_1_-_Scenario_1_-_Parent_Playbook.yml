@@ -1,0 +1,677 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+description: "This playbook demonstrates sub-playbook looping using a for each method.
+  \ \n\nWe start by setting an array to a context key that we are going to loop over.
+  \ The array is a list of dictionaries with or without a base64 encoded string. \n\nWe
+  pass this into the sub-playbook to loop over, decode the string and return the original
+  and decoded value. \n\nIndividual steps in the playbook may have additional details. "
+id: 004e8e6e-a1ed-4ade-89da-322990b5fb9d
+inputs: []
+name: XSOAR Engineer Training - Training 1 - Scenario 1 - Parent Playbook
+outputs: []
+sourceplaybookid: XSOAR Engineer Training - For Each Loops (Parent)
+starttaskid: "0"
+tags:
+- training
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: bbe10148-8ac8-4946-852a-590aa0523999
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: bbe10148-8ac8-4946-852a-590aa0523999
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": -475
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: Data
+      stringify:
+        simple: "false"
+      value:
+        simple: |-
+          [
+              {
+                  "Base64":"aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQo=",
+                  "OtherKey":1
+              },
+              {
+                  "OtherKey":2
+              },
+                  {
+                  "Base64":"aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1yb2c4b3UtWmVwRQ==",
+                  "OtherKey":3
+              }
+          ]
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Set a value in context under the key you entered.
+
+        In this step we are setting an array to loop over into context, however typically this array would come from other playbook commands.  However for training purposes this is self contained.
+      id: a1592b4b-26f7-4b16-8777-bf03ca7d8320
+      iscommand: false
+      name: Set Data for Loop
+      script: Set
+      type: regular
+      version: -1
+    taskid: a1592b4b-26f7-4b16-8777-bf03ca7d8320
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "22"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      all:
+        simple: "yes"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "Delete field from context\n\nThis deletes our context, allowing
+        us to re-run the playbook for testing purposes.   "
+      id: 13012eed-8f66-4396-8157-3e086f42458b
+      iscommand: false
+      name: Delete Context
+      script: DeleteContext
+      type: regular
+      version: -1
+    taskid: 13012eed-8f66-4396-8157-3e086f42458b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": -315
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "14"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: '### Click on "Mark Complete" to continue'
+      id: 94063f14-e758-47b6-811b-f27bd3c2cf98
+      iscommand: false
+      name: Scenario Description
+      type: regular
+      version: -1
+    taskid: 94063f14-e758-47b6-811b-f27bd3c2cf98
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 225
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      forEach: true
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "13"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      data:
+        complex:
+          root: Data
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This sub-playbook works with the parent, and will loop over the
+        passed in data, and IF there is a Base64 key, it will decode it, and return
+        a new key called LoopData with contained the original Base64 and the decoded
+        base 64. \n\nMake sure to check the Playbook Inputs/Outputs to see what to
+        pass in, and what this playbook will output to the parent. "
+      id: 40413f2b-5848-44ce-8d08-5de515574e93
+      iscommand: false
+      name: XSOAR Engineer Training - Training 1 - Scenario 1 - Sub-Playbook
+      playbookId: 66ddbd3c-f624-49fa-8544-70ef48d25e3c
+      type: playbook
+      version: -1
+    taskid: 40413f2b-5848-44ce-8d08-5de515574e93
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 260,
+          "y": 580
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "21"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a5e5bacb-1439-4005-87e3-f36f307d6fa9
+      iscommand: false
+      name: STOP EDITING
+      type: title
+      version: -1
+    taskid: a5e5bacb-1439-4005-87e3-f36f307d6fa9
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 750
+        }
+      }
+  "14":
+    continueonerrortype: ""
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 23d49e56-249f-4678-8e3a-9ed5bb548403
+      iscommand: false
+      name: START EDITING
+      type: title
+      version: -1
+    taskid: 23d49e56-249f-4678-8e3a-9ed5bb548403
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 415
+        }
+      }
+  "15":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: SolutionHandler.scenarioOneResult
+          operator: isExists
+      - - left:
+            iscontext: true
+            value:
+              simple: SolutionHandler.scenarioOneResult
+          operator: isNotEmpty
+      - - left:
+            iscontext: true
+            value:
+              simple: SolutionHandler.scenarioOneResult
+          operator: isEqualString
+          right:
+            value:
+              simple: pass
+      label: "yes"
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "24"
+      "yes":
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c8c2c04e-5bd2-4016-8763-22d8a5301ea6
+      iscommand: false
+      name: Was the scenario complete?
+      type: condition
+      version: -1
+    taskid: c8c2c04e-5bd2-4016-8763-22d8a5301ea6
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 1070
+        }
+      }
+  "16":
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "18"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: '### Click on "Mark Complete" to continue'
+      id: b0b08914-b6ad-4ba0-869f-5d92b2fc3336
+      iscommand: false
+      name: Scenario complete
+      type: regular
+      version: -1
+    taskid: b0b08914-b6ad-4ba0-869f-5d92b2fc3336
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1395
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "19"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      name:
+        simple: XSOAR Engineer Training - Training 1 - Scenario Manager
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.playbook
+      id: 2a8f67e4-c328-4327-8c44-43873ab4de1e
+      iscommand: true
+      name: Scenario Selection
+      script: Builtin|||setPlaybook
+      type: regular
+      version: -1
+    taskid: 2a8f67e4-c328-4327-8c44-43873ab4de1e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 1745
+        }
+      }
+  "18":
+    continueonerrortype: ""
+    id: "18"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "17"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      activetrainingscenario:
+        complex:
+          accessor: activetrainingscenario
+          root: incident
+          transformers:
+          - args:
+              by:
+                value:
+                  simple: "1"
+            operator: addition
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 7116a59f-1632-4718-8c37-16b7f93e48e6
+      iscommand: true
+      name: Change Scenario
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 7116a59f-1632-4718-8c37-16b7f93e48e6
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1560
+        }
+      }
+  "19":
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7183731d-0afc-446c-8c57-4c1eabf97c88
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 7183731d-0afc-446c-8c57-4c1eabf97c88
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 1920
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "17"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: '### Click on "Mark Complete" to continue'
+      id: 85056b2c-5df3-467b-8747-896fda560bee
+      iscommand: false
+      name: Looks like some more work is needed!
+      type: regular
+      version: -1
+    taskid: 85056b2c-5df3-467b-8747-896fda560bee
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1570
+        }
+      }
+  "21":
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "15"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 903f2ca9-a5ee-4c59-8a1a-a8e0e0cf2305
+      iscommand: false
+      name: Check Solution
+      script: ed446464-16a3-4c87-840e-a0c061d91c0e
+      type: regular
+      version: -1
+    taskid: 903f2ca9-a5ee-4c59-8a1a-a8e0e0cf2305
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 895
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      xsoarengineertrainingscenariodescription:
+        simple: "## XSOAR Engineer Training - For Each Loops (Parent)\n\nThis playbook
+          demonstrates sub-playbook looping using a for each method.  \n\nWe start
+          by setting an array to a context key that we are going to loop over.  The
+          array is a list of dictionaries with or without a base64 encoded string.
+          \n\nWe pass this into the sub-playbook to loop over, decode the string and
+          return the original and decoded value. \n\nIndividual steps in the playbook
+          may have additional details. \n\n### Your job is to edit the playbook to
+          ensure that the playbook inputs are in deed looping for each.\n\n### Click
+          on \"Mark Complete\" within the task to the right after you've made the
+          necessary changes. "
+      xsoarengineertrainingscenariotitle:
+        complex:
+          accessor: activetrainingscenario
+          root: incident
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: '### XSOAR ENGINEERING TRAINING 1 Scenario '
+              suffix: {}
+            operator: concat
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 0f7c99a4-7fe3-4a1c-8919-d03d6cb251e5
+      iscommand: true
+      name: Setup Scenario Fields
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 0f7c99a4-7fe3-4a1c-8919-d03d6cb251e5
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": -150
+        }
+      }
+  "23":
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "16"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      xsoarengineertrainingscenariodescription:
+        simple: |-
+          ## Awesome job!
+
+          Here is some more information about what you just did and some more tips, training links to the topic for next scenario.
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 6b341d02-9f3d-4322-8b1d-0e1004c4e208
+      iscommand: true
+      name: Set Description
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 6b341d02-9f3d-4322-8b1d-0e1004c4e208
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1240
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      xsoarengineertrainingscenariodescription:
+        simple: |-
+          ## It doesn't look like the right changes were made!
+
+          You should look to see if the inputs for the subplaybook are set correctly. You will only need to edit the parent playbook for this scenario.
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: c5cc16a6-73c9-4742-8f14-9eff26af81b5
+      iscommand: true
+      name: Set Description
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: c5cc16a6-73c9-4742-8f14-9eff26af81b5
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1395
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 2460,
+        "width": 810,
+        "x": 50,
+        "y": -475
+      }
+    }
+  }
